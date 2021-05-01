@@ -22,23 +22,23 @@ while [ $CHOICE != 10 ] ; do
 	case $CHOICE in
 		1)
 			{
-				echo "You have selected operating system info"
+				sh ./proj3_submenu.sh 1
 			};;
 		2)
 			{
-				echo "You have selected hostname and Dns info"
+				sh ./proj3_submenu.sh 2
 			};;
 		3)
 			{
-				echo "You have selected operating system info"
+				sh ./proj3_submenu.sh 3
 			};;
 		4)
 			{
-				echo "You have selected hostname and Dns info"
+				sh ./proj3_submenu.sh 4
 			};;
 		5)
 			{
-				echo "You have selected hostname and Dns info"
+				sh ./proj3_submenu.sh 5
 			};;
 		6)
 			{
@@ -50,11 +50,11 @@ while [ $CHOICE != 10 ] ; do
 			};;
 		8)
 			{
-				echo "You have selected operating system info"
+				sh ./proj3_submenu.sh 8
 			};;
 		9)
 			{
-				echo "You have selected hostname and Dns info"
+				sh ./proj3_submenu.sh 9
 			};;
 		10)
 			{

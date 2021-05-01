@@ -9,6 +9,8 @@ handle_one()
 	echo "----------------------------------------------------"
 	echo "              System Information                    "
 	echo "----------------------------------------------------"
+	OS=$(uname -a | cut -d" " -f1)
+	echo "Operating Systyem: $OS" 
 	printf "%b\n" "$(/usr/bin/lsb_release -a)"
 	wait_continue
 }
@@ -17,8 +19,17 @@ handle_two()
 	echo "----------------------------------------------------"
 	echo "              Hostname and DNS information          "
 	echo "----------------------------------------------------"
-	HOST=$(hostname -A)
+	HOST=$(hostname)
+	DOMAINNAME=$(dnsdomainname)
+	FQDN=$(hostname -f)
+	IPADD=$(hostname -i | cut -d" " -f2)
+	NAMESERV=$(grep 'nameserver' /etc/resolv.conf)
 	echo "Hostname: $HOST"
+	echo "DNS Domain: $DOMAINNAME"
+	echo "Fully qualififed domain name: $FQDN"
+	echo "Network address (IP): $IPADD"
+	echo "DNS name servers (DNS IP): $NAMERSERV"
+	wait_continue
 }
 handle_three()
 {
@@ -49,6 +60,15 @@ handle_four()
 	echo $(/bin/who)
 	wait_continue
 }
+handle_five()
+{
+	echo "----------------------------------------------------"
+	echo "              List of last logged in Users          "
+	echo "----------------------------------------------------"
+	printf "%b\n" "$(last -R | sort -u)"
+	wait_continue
+
+}
 handle_six()
 {
 	echo "----------------------------------------------------"
@@ -63,18 +83,30 @@ handle_seven()
 	echo "----------------------------------------------------"
 	echo "              Disk Usage Info                       "
 	echo "----------------------------------------------------"
-	printf "%b\n" "$(df --output=pcent,target)"
+        printf "%b\n" "$(df --output=pcent,target)"
 	wait_continue
 }
 handle_eight()
 {
-
+	CURRDIR=$(/bin/pwd)
+	sh ./project1.sh ./$HOME $CURRDIR/filetree.html
+}
+handle_nine()
+{
+	echo "****************************************************"
+	echo "*** Process was not implemented for this project ***"
+	echo "****************************************************"
+	wait_continue
 }
 
 case $1 in
 	1)
 		{
 			handle_one
+		};;
+	2)
+		{
+			handle_two
 		};;
 	3)
 		{
@@ -84,6 +116,10 @@ case $1 in
 		{
 			handle_four
 		};;
+	5)
+		{
+			handle_five
+		};;
 	6)
 		{
 			handle_six
@@ -91,6 +127,14 @@ case $1 in
 	7)
 		{
 			handle_seven
+		};;
+	8)
+		{
+			handle_eight
+		};;
+	9)
+		{
+			handle_nine
 		};;
 	*)
 		{
